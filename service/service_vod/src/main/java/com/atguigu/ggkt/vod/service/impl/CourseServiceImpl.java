@@ -1,16 +1,21 @@
 package com.atguigu.ggkt.vod.service.impl;
 
 import com.atguigu.ggkt.model.vod.Course;
+import com.atguigu.ggkt.model.vod.CourseDescription;
 import com.atguigu.ggkt.model.vod.Subject;
 import com.atguigu.ggkt.model.vod.Teacher;
+import com.atguigu.ggkt.vo.vod.CourseFormVo;
 import com.atguigu.ggkt.vo.vod.CourseQueryVo;
+import com.atguigu.ggkt.vo.vod.CourseVo;
 import com.atguigu.ggkt.vod.mapper.CourseMapper;
+import com.atguigu.ggkt.vod.service.CourseDescriptionService;
 import com.atguigu.ggkt.vod.service.CourseService;
 import com.atguigu.ggkt.vod.service.SubjectService;
 import com.atguigu.ggkt.vod.service.TeacherService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -33,7 +38,8 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     private TeacherService teacherService;
     @Autowired
     private SubjectService subjectService;
-
+    @Autowired
+    private CourseDescriptionService descriptionService;
     @Override
     public Map<String,Object> findPageCourse(Page<Course> pageParam, CourseQueryVo courseQueryVo) {
         Map<String, Object> map = new HashMap<>();
@@ -66,6 +72,44 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         map.put("size",size);
         return map;
     }
+
+    @Override
+    public Long saveCourse(CourseFormVo courseFormVo) {
+        Course course = new Course();
+        BeanUtils.copyProperties(courseFormVo,course);
+        baseMapper.insert(course);
+        CourseDescription courseDescription = new CourseDescription();
+        courseDescription.setDescription(courseFormVo.getDescription());
+        courseDescription.setId(courseFormVo.getId());
+        descriptionService.save(courseDescription);
+        return course.getId();
+    }
+
+    @Override
+    public CourseFormVo getCourseInfoById(Long id) {
+        Course course = baseMapper.selectById(id);
+        if (course==null){
+            return  null;
+        }
+        CourseDescription courseDescription = descriptionService.getById(id);
+        CourseFormVo courseFormVo = new CourseFormVo();
+        BeanUtils.copyProperties(course, courseFormVo);
+        if (courseDescription!=null){
+            courseFormVo.setDescription(courseDescription.getDescription());
+        }
+        return courseFormVo;
+    }
+
+    @Override
+    public void updateCourseId(CourseFormVo courseFormVo) {
+        Course course = new Course();
+        CourseDescription courseDescription = new CourseDescription();
+        BeanUtils.copyProperties(courseFormVo,course);
+        courseDescription.setDescription(courseFormVo.getDescription());
+        baseMapper.updateById(course);
+        descriptionService.updateById(courseDescription);
+    }
+
     //获取讲师和分类名称
     private Course getTeacherOrSubjectName(Course course) {
         //查询讲师名称

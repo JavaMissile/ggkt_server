@@ -2,8 +2,11 @@ package com.atguigu.ggkt.vod.controller;
 
 
 import com.atguigu.ggkt.model.vod.Course;
+import com.atguigu.ggkt.model.vod.Subject;
 import com.atguigu.ggkt.result.Result;
+import com.atguigu.ggkt.vo.vod.CourseFormVo;
 import com.atguigu.ggkt.vo.vod.CourseQueryVo;
+import com.atguigu.ggkt.vo.vod.CourseVo;
 import com.atguigu.ggkt.vod.mapper.CourseMapper;
 import com.atguigu.ggkt.vod.service.CourseService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -32,7 +35,7 @@ public class CourseController {
 
     @ApiOperation("点播课程列表")
     @GetMapping("getCourse/{page}/{limit}")
-    public Result getcourse(@PathVariable Long page,
+    public Result getCourse(@PathVariable Long page,
                             @PathVariable Long limit,
                             CourseQueryVo courseQueryVo){
         Page<Course> pageParam = new Page<>(page,limit);
@@ -40,5 +43,23 @@ public class CourseController {
         return Result.ok(map);
     }
 
+    @ApiOperation("添加课程")
+    @PostMapping("saveCourse")
+    public Result saveCourse(@RequestBody CourseFormVo courseFormVo){
+        Long courseId= courseService.saveCourse(courseFormVo);
+        return Result.ok(courseId);
+    }
+
+    @GetMapping("get/{id}")
+    public Result get(@PathVariable Long id){
+        CourseFormVo courseFormVo = courseService.getCourseInfoById(id);
+        return Result.ok(courseFormVo);
+    }
+
+    @PostMapping("update")
+    public Result get(@RequestBody CourseFormVo courseFormVo){
+        courseService.updateCourseId(courseFormVo);
+        return Result.ok(null);
+    }
 }
 

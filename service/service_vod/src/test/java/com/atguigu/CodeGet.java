@@ -14,7 +14,7 @@ public class CodeGet {
     public static void main(String[] args) {
         String[] tableNames=
                 {"chapter","comment","course","course_collect","course_description","video","video_visitor"};
-            createCode(tableNames);
+            createCode(null);
     }
 
     private static void createCode(String[] tableNames) {
