@@ -9,3 +9,5 @@
 - Lombok
 
 # 尚未完成，仍在继续
+
+- Gitee Github同步更新
