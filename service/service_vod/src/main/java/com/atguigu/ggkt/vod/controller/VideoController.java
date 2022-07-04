@@ -41,7 +41,7 @@ public class VideoController {
     }
 
     @ApiOperation(value = "修改")
-    @PutMapping("update")
+    @PostMapping("update")
     public Result updateById(@RequestBody Video video) {
         videoService.updateById(video);
         return Result.ok(null);

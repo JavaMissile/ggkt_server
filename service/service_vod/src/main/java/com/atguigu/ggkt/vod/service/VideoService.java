@@ -1,6 +1,7 @@
 package com.atguigu.ggkt.vod.service;
 
 import com.atguigu.ggkt.model.vod.Video;
+
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -12,5 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-07-02
  */
 public interface VideoService extends IService<Video> {
+
+    void removeVideoByCourseId(Long id);
 
 }
