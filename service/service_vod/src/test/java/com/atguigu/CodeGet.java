@@ -13,8 +13,8 @@ public class CodeGet {
 
     public static void main(String[] args) {
         String[] tableNames=
-                {"chapter","comment","course","course_collect","course_description","video","video_visitor"};
-            createCode(null);
+                {"order_detail","order_info","payment_info"};
+            createCode(tableNames);
     }
 
     private static void createCode(String[] tableNames) {
@@ -26,7 +26,7 @@ public class CodeGet {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
         //gc.setOutputDir(projectPath + "/src/main/java");
-        gc.setOutputDir("F:\\workspace\\ggkt_parent\\service\\service_vod"+"/src/main/java");
+        gc.setOutputDir("F:\\workspace\\ggkt_parent\\service\\service_order"+"/src/main/java");
 
         gc.setServiceName("%sService");	//去掉Service接口的首字母I
         gc.setAuthor("atguigu");
@@ -35,7 +35,7 @@ public class CodeGet {
 
         // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/glkt_vod");
+        dsc.setUrl("jdbc:mysql://localhost:3306/glkt_order");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("213213");

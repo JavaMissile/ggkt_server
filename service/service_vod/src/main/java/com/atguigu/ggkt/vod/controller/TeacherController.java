@@ -28,7 +28,7 @@ import java.util.List;
  * @since 2022-06-29
  */
 @Api(tags = "讲师管理接口")
-@CrossOrigin//跨域临时解决方案
+//@CrossOrigin//跨域临时解决方案
 @RestController
 @RequestMapping("/admin/vod/teacher")
 public class TeacherController {

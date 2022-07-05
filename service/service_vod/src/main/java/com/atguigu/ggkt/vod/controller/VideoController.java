@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "课程小结（课时）")
 @RestController
 @RequestMapping(value="/admin/vod/video")
-@CrossOrigin
+//@CrossOrigin
 public class VideoController {
 
     @Autowired

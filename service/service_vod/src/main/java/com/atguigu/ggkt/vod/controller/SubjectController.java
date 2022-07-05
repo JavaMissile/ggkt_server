@@ -22,7 +22,7 @@ import java.util.List;
  * @since 2022-07-01
  */
 @Api(tags = "课程接口")
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/admin/vod/subject")
 public class SubjectController {

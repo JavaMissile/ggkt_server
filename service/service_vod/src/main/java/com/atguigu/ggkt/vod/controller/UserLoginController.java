@@ -10,7 +10,7 @@ import java.util.Map;
  * @author Missile
  * @Date 2022-06-30-14:31
  */
-@CrossOrigin//跨域临时解决方案
+//@CrossOrigin//跨域临时解决方案
 @RestController
 @RequestMapping("/admin/vod/user")
 public class UserLoginController {

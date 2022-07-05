@@ -29,7 +29,7 @@ import java.util.Map;
  */
 @Api(tags = "点播课程接口")
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("admin/vod/course")
 public class CourseController {
     @Autowired

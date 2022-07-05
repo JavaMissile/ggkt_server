@@ -24,7 +24,7 @@ import java.util.List;
 @Api(tags = "课程发布接口")
 @RestController
 @RequestMapping(value="/admin/vod/chapter")
-@CrossOrigin
+//@CrossOrigin
 public class ChapterController {
 
     @Autowired
